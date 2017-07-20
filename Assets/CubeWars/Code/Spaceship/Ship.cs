@@ -24,6 +24,7 @@ public class Ship : MonoBehaviour
     public float responsiveness = 3.0f;
 
     public float Throttle { get { return input.throttle; } }
+    public bool IsPlayer { get { return input.isPlayer; } }
 
     private float speed = 0.0f;
     private Vector3 rotationSpeed = Vector3.zero;
