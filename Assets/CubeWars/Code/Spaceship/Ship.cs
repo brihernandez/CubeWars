@@ -13,6 +13,12 @@ public class Ship : MonoBehaviour
     [Tooltip("How long after the shield is fully depleted before it starts recharging again.")]
     public float shieldDownTime = 10.0f;
 
+    [Header("Effects")]
+    [Tooltip("Particle effect to play when shield goes down.")]
+    public ParticleSystem shieldDownEffect;
+    [Tooltip("Particle effect to play when the ship dies.")]
+    public ParticleSystem explosionEffect;
+
     [Header("Flight")]
     [Tooltip("Max speed in m/s")]
     public float maxSpeed = 100.0f;
@@ -59,7 +65,6 @@ public class Ship : MonoBehaviour
         if (weapon != null)
             weapon.fire = input.fire;
 
-
         // Recharge shield if it's not on cooldown.
         shieldCooldown -= Time.deltaTime;
         if (shieldCooldown <= 0.0f)
@@ -75,8 +80,8 @@ public class Ship : MonoBehaviour
 
     public void ApplyDamage(float damage)
     {
-        // Apply damage to shield first.
-        if (shieldHp > 0.0f)
+        // Apply damage to shield first, but only if there was a shield at all.
+        if (shield > 0.0f && shieldHp > 0.0f)
         {
             shieldHp -= damage;
             shieldHp = Mathf.Max(shieldHp, 0.0f);
@@ -85,6 +90,9 @@ public class Ship : MonoBehaviour
             if (shieldHp <= 0.0f)
             {
                 shieldCooldown = shieldDownTime;
+
+                if (shieldDownEffect != null)
+                    Instantiate(shieldDownEffect, transform.position, transform.rotation);
             }
         }
         else
@@ -103,6 +111,9 @@ public class Ship : MonoBehaviour
 
     public void DestroyShip()
     {
+        if (explosionEffect != null)
+            Instantiate(explosionEffect, transform.position, transform.rotation);
+
         Destroy(gameObject);
     }
 }

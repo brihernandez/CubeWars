@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: 7932a540c61b70947b0ca7f0bddc03e7
-timeCreated: 1500427330
+timeCreated: 1500523385
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - shieldDownEffect: {fileID: 198159391861669654, guid: 009b87ef82e3e33429f08ea60a09f3fe,
+      type: 2}
+  - explosionEffect: {fileID: 198341643862927502, guid: 886b4b606f6cb014a815c8a0bf79df87,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
