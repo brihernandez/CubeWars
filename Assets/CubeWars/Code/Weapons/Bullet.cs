@@ -22,7 +22,16 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         if (fired)
-            MoveBullet();
+        {
+            if (Time.time - fireTime > timeToLive)
+            {
+                DestroyBullet(true);
+            }
+            else
+            {
+                MoveBullet();
+            }
+        }
     }
 
     private void MoveBullet()
